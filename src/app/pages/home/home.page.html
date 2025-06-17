@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pokémons</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-loading message="Carregando Pokémons..." [isOpen]="isLoading"></ion-loading>
+
+  <ion-row *ngIf="!isLoading">
+    <ion-col size="6" *ngFor="let p of pokemons; let i = index">
+      <ion-card (click)="goToNextDetails(p.name, p.url)">
+        <img [src]="p.image" />
+        <ion-card-header>{{ p.name | titlecase }}</ion-card-header>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="!isLoading">
+    <ion-col size="auto">
+      <ion-button (click)="goBack()">Sair</ion-button>
+    </ion-col>
+    <ion-col size="auto">
+      <ion-button (click)="prevPage()">Anterior</ion-button>
+    </ion-col>
+    <ion-col size="auto">
+      <ion-button (click)="nextPage()">Próxima</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
