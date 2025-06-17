@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ pokemon?.name | titlecase }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToNextPokemon()">Próximo</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-loading message="Carregando detalhes..." [isOpen]="isLoading"></ion-loading>
+
+  <div *ngIf="!isLoading && pokemon">
+    <img [src]="pokemon.sprites.front_default" style="display:block; margin:0 auto; width:150px;" />
+
+    <ion-list>
+      <ion-item *ngFor="let stat of pokemon.stats">
+        <ion-label>{{ stat.stat.name | titlecase }}: {{ stat.base_stat }}</ion-label>
+      </ion-item>
+
+      <ion-item *ngFor="let type of pokemon.types">
+        <ion-label>Tipo: {{ type.type.name | titlecase }}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Altura: {{ pokemon.height }} / Peso: {{ pokemon.weight }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
